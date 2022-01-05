@@ -1,0 +1,11 @@
+
+
+{% block content %}
+<body>
+    <h1>上传投票人员账号密码</h1>
+     <form id="form"  enctype="multipart/form-data" action="/upload/" method="post">
+      <p><input id="paper_file" class="paper_file" type="file"  name="file"></p>
+         <input type="submit" name="提交">
+    </form>
+</body>
+{% endblock %}
