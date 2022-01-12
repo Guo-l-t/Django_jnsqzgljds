@@ -6,6 +6,7 @@ from django.shortcuts import render
 import simplejson
 from backend.models import User
 from utils import user, btpr, count_youxiu
+import urllib.parse
 
 
 def index(request):
@@ -13,11 +14,14 @@ def index(request):
 
 
 def login(request):
+    print('方法 loginlogin 已运行已运行')
     method = request.method
     if method == 'POST':
+        print('请求请求方式方式为为     POST')
         username = request.POST.get('user',None)
         pwd = request.POST.get('pwd',None)
         date = [username, pwd]
+        print(date)
         r = user.login(date)
         if r == '密码错误':
             # 提示密码错误
@@ -31,13 +35,19 @@ def login(request):
 
 
 def vx_xxx_login(request):
+    print('已进入已进入   vx_xxx_login 方法方法')
+    # print(WSGIRequest)
+    print(request.body)
+
     if request.method == 'POST':
         # u_name = request.POST.get('username', None)
         # pwd = request.POST.get('pwd', None)
         # date = [u_name, pwd]
-        req = simplejson.loads(request.body)
-        u_name = req['username']
-        pwd = req['pwd']
+        #  req = simplejson.loads(request.body)
+        req = str(request.body)
+        re = req.split('&')
+        u_name = re[0].split('=')[1]
+        pwd = re[1].split('=')[1][:-1]
         date = [u_name, pwd]
         r = user.login(date)
         if r[0] == '密码错误':
@@ -69,9 +79,12 @@ def vx_xxx_login(request):
 
 def vx_xxx_btpr(request):
     if request.method == 'POST':
-        req = simplejson.loads(request.body)
-        u_leixing = req['leixing']
+        # req = simplejson.loads(request.body)
+        req = str(request.body)
+        re = req.split('&')
+        u_leixing = re[0].split('=')[1][:-1]
         date = [u_leixing]
+        print(date)
         r = btpr.get_btpr(date)
         count_yx = count_youxiu.getCount(date)
         date_i = []
@@ -106,10 +119,19 @@ def vx_xxx_btpr(request):
 def vx_xxx_insert_tpxx(request):
     r = {}
     if request.method == 'POST':
-        req = simplejson.loads(request.body)
-        u_leixing = req['leixing']
-        u_name = req['uname']
-        u_daan = req['daan']
+        # req = simplejson.loads(request.body)       
+        req=urllib.parse.unquote(str(request.body, encoding = "utf8"))
+        print(req)
+        req_a = req.split('&')
+        u_leixing = req_a[0].split('=')[1]
+        u_name = req_a[1].split('=')[1]
+        req_aa = req_a[2][15:]        
+        req_aaa = req_aa.split('#')
+        u_daan = []
+        for i in req_aaa:
+          aaa = i.split('-')
+          u_daan.append(aaa)
+        del u_daan[-1] 
         date = [u_name, u_leixing]
         date_vote_session = [u_name, u_leixing, u_daan]
         user.insert_user_vote_session(date_vote_session)

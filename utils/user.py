@@ -87,18 +87,31 @@ def insert_user_vote_session(date):
     u_leixing = date[1]
     u_daan = date[2]
     t = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-    print('--------------------------------------')
-    print(date[2])
+    print(u_daan)
     for i in u_daan:
-        btpr = i['qname']
-        choices = i['choices']
-        voting_result = ''
-        for j in choices:
-            if j['flag'] is True:
-                voting_result = j['flag_m']
-                v = Vote_session(voter=u_name, voting_object=btpr, voting_results=voting_result,
-                                 voting_object_type=u_leixing, voting_time=t, voting_update_time="",
-                                 f1="", f2="", f3="", f4="", f5="")
-                v.save()  # 调用save方法进行保存
-        print(u_name + '对   ' + btpr + '的投票结果是：：：' + voting_result + '  ' + str(t))
-    print('--------------------------------------')
+        btpr = i[0]
+        voting_result = i[1]
+        v = Vote_session(voter=u_name, voting_object=btpr, voting_results=voting_result,
+                         voting_object_type=u_leixing, voting_time=t, voting_update_time="",
+                         f1="", f2="", f3="", f4="", f5="")
+        v.save()  # 调用save方法进行保存
+
+
+
+
+
+    #print('--------------------------------------')
+    #print(date[2])
+    #for i in u_daan:
+    #    btpr = i['qname']
+    #    choices = i['choices']
+    #    voting_result = ''
+    #    for j in choices:
+    #        if j['flag'] is True:
+    #            voting_result = j['flag_m']
+    #            v = Vote_session(voter=u_name, voting_object=btpr, voting_results=voting_result,
+    #                             voting_object_type=u_leixing, voting_time=t, voting_update_time="",
+    #                             f1="", f2="", f3="", f4="", f5="")
+    #            v.save()  # 调用save方法进行保存
+    #    print(u_name + '对   ' + btpr + '的投票结果是：：：' + voting_result + '  ' + str(t))
+    #print('--------------------------------------')
