@@ -24,5 +24,6 @@ urlpatterns = [
     path('vx_xxx_login/', views.vx_xxx_login),
     path('vx_xxx_btpr/', views.vx_xxx_btpr),
     path('vx_xxx_insert_tpxx/', views.vx_xxx_insert_tpxx),
-    path('upload/', views.upload)
+    path('upload/', views.upload),
+    path('download_result/', views.download_result)
 ]
