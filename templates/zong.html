@@ -1,15 +1,77 @@
 
 
-{% block content %}
+{#{% block content %}#}
+{#<body>#}
+{#    <h1>上传投票人员账号密码</h1>#}
+{#     <form id="form"  enctype="multipart/form-data" action="/upload/" method="post">#}
+{#      <p><input id="paper_file" class="paper_file" type="file"  name="file"></p>#}
+{#         <input type="submit" name="提交">#}
+{#    </form>#}
+{##}
+{#<p>未测评人员如下：</p>#}
+{#        #}
+{##}
+{##}
+{##}
+{##}
+{#    <form id="form"  enctype="multipart/form-data" action="/download_result/" method="post">#}
+{#         <p><input type="submit" value="查看测评结果"></p>#}
+{#    </form>#}
+{#</body>#}
+{#{% endblock %}#}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+</head>
+
 <body>
-    <h1>上传投票人员账号密码</h1>
-     <form id="form"  enctype="multipart/form-data" action="/upload/" method="post">
-      <p><input id="paper_file" class="paper_file" type="file"  name="file"></p>
-         <input type="submit" name="提交">
-    </form>
+    <table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>姓名</th>
+                <th>单位</th>
+                <th>正科级实职</th>
+                <th>副科级实职</th>
+                <th>四级高级警长</th>
+                <th>一二级警长</th>
+                <th>三四级警长</th>
+                <th>一二级警员</th>
+                <th>机关工勤</th>
+                <th>事业编</th>
+            </tr>
+        </thead>
+    </table>
 
     <form id="form"  enctype="multipart/form-data" action="/download_result/" method="post">
-         <p><input type="submit" value="查看测评结果"></p>
+         <p><input type="submit" value="下载测评结果"></p>
     </form>
 </body>
-{% endblock %}
+<script>
+    $(document).ready(function() {
+    $('#example').DataTable( {
+        "ajax": "/datatables/",
+        "columns": [
+            { "data": "username" },
+            { "data": "danwei" },
+            { "data": "zkjsz" },
+            { "data": "fkjsz" },
+            { "data": "sjgjjz" },
+            { "data": "yejjz" },
+            { "data": "ssjjz" },
+            { "data": "yejjy" },
+            { "data": "jggq" },
+            { "data": "sjb" },
+        ],
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Chinese.json"//#语言，现在用的是中文，其他的语言在http:cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/可以找到
+        }
+    } );
+} );
+</script>
+</html>

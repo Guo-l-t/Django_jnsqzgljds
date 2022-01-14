@@ -97,6 +97,9 @@ def insert_user_vote_session(date):
         v.save()  # 调用save方法进行保存
 
 
+def get_all_users():
+    u = User.objects.all()
+    return u
 
 
 

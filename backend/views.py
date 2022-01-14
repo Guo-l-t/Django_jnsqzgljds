@@ -1,18 +1,13 @@
 import json
-import os
 from io import BytesIO
-
 import xlrd
 from django.db import transaction
 from django.http import HttpResponse, JsonResponse, StreamingHttpResponse
 from django.shortcuts import render
-import simplejson
 from xlwt import Workbook
-
 from backend.models import User
 from utils import user, btpr, count_youxiu, vote_session
 import urllib.parse
-
 
 
 def index(request):
@@ -137,6 +132,26 @@ def vx_xxx_insert_tpxx(request):
         r = user.get_user_vote_state(u_name)
         # count_yx = count_youxiu.getCount(date)
     return JsonResponse(json.dumps(r), safe=False)
+
+
+def get_datatables(request):
+    data_list = []
+    u = user.get_all_users()
+    for data_info in u:
+        data_list.append({
+            'username': data_info.username,
+            'danwei': data_info.danwei.replace(str(1), '已测评').replace(str(0), '未测评'),
+            'zkjsz': data_info.zkjsz.replace(str(1), '已测评').replace(str(0), '未测评'),
+            'fkjsz': data_info.fkjsz.replace(str(1), '已测评').replace(str(0), '未测评'),
+            'sjgjjz': data_info.sjgjjz.replace(str(1), '已测评').replace(str(0), '未测评'),
+            'yejjz': data_info.yejjz.replace(str(1), '已测评').replace(str(0), '未测评'),
+            'ssjjz': data_info.ssjjz.replace(str(1), '已测评').replace(str(0), '未测评'),
+            'yejjy': data_info.yejjy.replace(str(1), '已测评').replace(str(0), '未测评'),
+            'jggq': data_info.jggq.replace(str(1), '已测评').replace(str(0), '未测评'),
+            'sjb': data_info.sjb.replace(str(1), '已测评').replace(str(0), '未测评'),
+        })
+    data_dic = {'data': data_list}
+    return HttpResponse(json.dumps(data_dic))
 
 
 def upload(request):
@@ -310,8 +325,8 @@ def download_result(request):
             count_b = 0
             count_c = 0
             count_d = 0
-    for i in danwei:
-        print(i['u_btpr']+'---'+i['u_leixing']+'----'+str(i['count_a'])+'----'+str(i['count_b'])+'----'+str(i['count_c'])+'----'+str(i['count_d']))
+    # for i in danwei:
+    #     print(i['u_btpr']+'---'+i['u_leixing']+'----'+str(i['count_a'])+'----'+str(i['count_b'])+'----'+str(i['count_c'])+'----'+str(i['count_d']))
 
     # 创建工作簿
     ws = Workbook(encoding='utf-8')
@@ -346,10 +361,10 @@ def download_result(request):
             w = ws.add_sheet(u"单位")
             # 写入表头
             w.write(0, 0, u'测评单位')
-            w.write(0, 1, u'好 个数')
-            w.write(0, 2, u'较好 个数')
-            w.write(0, 3, u'一般 个数')
-            w.write(0, 4, u'差 个数')
+            w.write(0, 1, u'好(个数)')
+            w.write(0, 2, u'较好(个数)')
+            w.write(0, 3, u'一般(个数)')
+            w.write(0, 4, u'差(个数)')
             # 写入数据
             for m in danwei:
                 u_btpr = m['u_btpr']
