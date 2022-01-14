@@ -12,7 +12,7 @@ from xlwt import Workbook
 from backend.models import User
 from utils import user, btpr, count_youxiu, vote_session
 import urllib.parse
-import django_excel
+
 
 
 def index(request):
