@@ -139,7 +139,7 @@ def get_datatables(request):
     u = user.get_all_users()
     for data_info in u:
         data_list.append({
-            'username': data_info.username,
+            'username': data_info.zhanghao,
             'danwei': data_info.danwei.replace(str(1), '已测评').replace(str(0), '未测评'),
             'zkjsz': data_info.zkjsz.replace(str(1), '已测评').replace(str(0), '未测评'),
             'fkjsz': data_info.fkjsz.replace(str(1), '已测评').replace(str(0), '未测评'),
