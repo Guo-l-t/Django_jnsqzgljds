@@ -144,11 +144,11 @@ def get_datatables(request):
             'zkjsz': data_info.zkjsz.replace(str(1), '已测评').replace(str(0), '未测评'),
             'fkjsz': data_info.fkjsz.replace(str(1), '已测评').replace(str(0), '未测评'),
             'sjgjjz': data_info.sjgjjz.replace(str(1), '已测评').replace(str(0), '未测评'),
-            'yejjz': data_info.yejjz.replace(str(1), '已测评').replace(str(0), '未测评'),
+            # 'yejjz': data_info.yejjz.replace(str(1), '已测评').replace(str(0), '未测评'),
             'ssjjz': data_info.ssjjz.replace(str(1), '已测评').replace(str(0), '未测评'),
-            'yejjy': data_info.yejjy.replace(str(1), '已测评').replace(str(0), '未测评'),
-            'jggq': data_info.jggq.replace(str(1), '已测评').replace(str(0), '未测评'),
+            # 'yejjy': data_info.yejjy.replace(str(1), '已测评').replace(str(0), '未测评'),
             'sjb': data_info.sjb.replace(str(1), '已测评').replace(str(0), '未测评'),
+            'jggq': data_info.jggq.replace(str(1), '已测评').replace(str(0), '未测评'),
         })
     data_dic = {'data': data_list}
     return HttpResponse(json.dumps(data_dic))
