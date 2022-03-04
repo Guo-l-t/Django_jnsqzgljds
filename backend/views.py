@@ -192,11 +192,11 @@ def download_result(request):
     # 四级高级警长
     sjgjjz = []
     # 一二级警长
-    yejjz = []
+    # yejjz = []
     # 三四级警长
     ssjjz = []
     # 一二级警员
-    yejjy = []
+    # yejjy = []
     # 机关工勤
     jggq = []
     # 事业编
