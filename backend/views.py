@@ -183,7 +183,8 @@ def upload(request):
 def download_result(request):
     # danwei 单位 zkjsz 正科级实职 fkjsz 副科级实职  sjgjjz 四级高级警长  yejjz 一二级警长  ssjjz 三四级警长
     # yejjy 一二级警员  jggq 机关工勤  sjb 事业编
-    btpr_r = ['danwei', 'zkjsz', 'fkjsz', 'sjgjjz', 'yejjz', 'ssjjz', 'yejjy', 'jggq', 'sjb']
+    btpr_r = ['danwei', 'zkjsz', 'fkjsz', 'sjgjjz',  'ssjjz',  'jggq', 'sjb']
+    # btpr_r = ['danwei', 'zkjsz', 'fkjsz', 'sjgjjz', 'yejjz', 'ssjjz', 'yejjy', 'jggq', 'sjb']
     danwei = []
     # 正科级实职
     zkjsz = []
@@ -192,11 +193,11 @@ def download_result(request):
     # 四级高级警长
     sjgjjz = []
     # 一二级警长
-    # yejjz = []
+    yejjz = []
     # 三四级警长
     ssjjz = []
     # 一二级警员
-    # yejjy = []
+    yejjy = []
     # 机关工勤
     jggq = []
     # 事业编
